@@ -21,15 +21,15 @@ stage("Package") {
 stage("Docker build") {
      steps {
       
-          sh "sudo docker build -t deepak_tomcat ."
+          sh "docker build -t deepak_tomcat ."
      }
 }
 
 stage("Deploy to staging") {
      steps {
-          sh "sudo docker stop \$(docker ps -qa)"
-          sh "sudo docker rm \$(docker ps -qa)"
-          sh "sudo docker run -d -it -v /var/lib/jenkins/workspace/docker-pipeline-web-app/target/:/usr/local/tomcat/webapps/ -p 8090:8080 --name Testtomcat deepak_tomcat"
+          sh "docker stop \$(docker ps -qa)"
+          sh "docker rm \$(docker ps -qa)"
+          sh "docker run -d -it -v /var/lib/jenkins/workspace/docker-pipeline-web-app/target/:/usr/local/tomcat/webapps/ -p 8090:8080 --name Testtomcat deepak_tomcat"
      }
 }
 
